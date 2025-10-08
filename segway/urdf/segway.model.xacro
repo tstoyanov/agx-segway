@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+<robot name="segway" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:macro name="segway_model">
+
+
+<xacro:property name="wheel_radius" value="0.2" />
+<xacro:property name="wheel_width" value="0.05" />
+<xacro:property name="wheel_offset" value="0.5" />
+<xacro:property name="body_height" value="0.75" />
+
+
+<link name="base_frame">
+  <visual>
+    <origin xyz="0 0 ${body_height/2}" rpy="0 0 0"/>
+    <geometry>
+      <box size="${wheel_offset} ${wheel_offset} ${body_height}" />
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="0 0 ${body_height/2}" rpy="0 0 0"/>
+    <geometry>
+      <box size="${wheel_offset} ${wheel_offset} ${body_height}" />
+    </geometry>
+  </collision>
+</link>
+
+<!-- wheels for tracks -->
+<link name="left_wheel">
+  <visual>
+    <origin xyz="0.0 0.0 0.0" rpy="${pi/2} 0 0"/>
+    <geometry>
+      <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
+    </geometry>
+    <material name="wheel_black">
+      <color rgba="0 0 0 1"/>
+    </material>
+  </visual>
+  <collision>
+    <origin xyz="0.0 0.0 0.0" rpy="${pi/2} 0 0"/>
+    <geometry>
+      <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="left_wheel_joint" type="continuous">
+  <origin xyz="0 ${-wheel_offset/2-wheel_width} 0" rpy="0 0 0" />
+  <axis xyz="0 1 0"/>
+  <parent link="base_frame"/>
+  <child link="left_wheel"/>
+</joint>
+
+<!-- wheels for tracks -->
+<link name="right_wheel">
+  <visual>
+    <origin xyz="0.0 0.0 0.0" rpy="${pi/2} 0 0"/>
+    <geometry>
+      <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
+    </geometry>
+    <material name="wheel_black">
+      <color rgba="0 0 0 1"/>
+    </material>
+  </visual>
+  <collision>
+    <origin xyz="0.0 0.0 0.0" rpy="${pi/2} 0 0"/>
+    <geometry>
+      <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="right_wheel_joint" type="continuous">
+  <origin xyz="0 ${wheel_offset/2+wheel_width} 0" rpy="0 0 0" />
+  <axis xyz="0 1 0"/>
+  <parent link="base_frame"/>
+  <child link="right_wheel"/>
+</joint>
+
+</xacro:macro>
+</robot>
