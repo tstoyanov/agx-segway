@@ -69,13 +69,14 @@ def generate_launch_description():
 
     #set the direction of the gravity vector
     gravity_direction = {"gravity_direction": "z"}
+    base_frame = {"base_frame": "base_frame"}
 
     control_node = Node(
         package="agx_sim_ros2",
         executable="agx_sim",
         parameters=[robot_description, robot_controllers, 
                      {"load_from_urdf": False}, mesh_pkg_path, {"debug_view": True}, 
-                     scene_file, gravity_direction],
+                     scene_file, gravity_direction, base_frame],
         output="both",
 #        prefix=['xterm -e gdb --args'],
     )
