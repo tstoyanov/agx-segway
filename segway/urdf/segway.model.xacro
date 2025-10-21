@@ -24,6 +24,11 @@
       <box size="${wheel_offset} ${wheel_offset} ${body_height}" />
     </geometry>
   </collision>
+  <inertial>
+    <origin rpy="0 0 0" xyz="0 0 0.5"/>
+    <mass value="5.0"/>
+    <inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.1"/>
+  </inertial>
 </link>
 
 <!-- wheels for tracks -->
